@@ -45,6 +45,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         cargarAutoBtn.setText("Cargar Auto");
+        cargarAutoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarAutoBtnActionPerformed(evt);
+            }
+        });
 
         verAutosBtn.setText("Ver Autos");
         verAutosBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +109,18 @@ public class Principal extends javax.swing.JFrame {
     private void verAutosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAutosBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verAutosBtnActionPerformed
+
+    private void cargarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarAutoBtnActionPerformed
+        // TODO add your handling code here:
+        
+        CargarAutos cargarAutos = new CargarAutos();
+        cargarAutos.setVisible(true);
+        cargarAutos.setLocationRelativeTo(null);
+        
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_cargarAutoBtnActionPerformed
 
     /**
      * @param args the command line arguments
