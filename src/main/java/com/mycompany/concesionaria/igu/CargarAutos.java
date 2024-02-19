@@ -5,6 +5,8 @@
 package com.mycompany.concesionaria.igu;
 
 import com.mycompany.concesionaria.logica.Controladora;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -252,32 +254,62 @@ public class CargarAutos extends javax.swing.JFrame {
 
     private void guardarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBtnActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            
         String marca = marcaTextField.getText();
         String modelo = modeloTextField.getText();
         String color = colorTextField.getText();
         String motor = motorTextField.getText();
         String patente = patenteTextField.getText();
-        int cantidadPuertas = Integer.parseInt(cantidadPuertasCombo.getSelectedItem().toString());
+        int cantidadPuertas = cantidadPuertasCombo.getSelectedIndex() > 0 ? Integer.parseInt(cantidadPuertasCombo.getSelectedItem().toString()) : 0;
         
+       
         
+        if(marca.isBlank() || modelo.isBlank() || color.isBlank() || motor.isBlank() || patente.isBlank() || cantidadPuertas == 0){
+            throw new Exception("Debes completar todos los campos");
+        } else {
+            
         controladora.guardarAuto(marca, modelo, color, motor, patente, cantidadPuertas);
         
+        mostrarMensaje("Se ha creado tu auto correctamente", "Guardar auto");
+        
+        limpiarDatos();
+        
+        }
 
+        } catch (Exception e){
+            mostrarMensaje(e.getMessage(), "Error");
+        }
+
+        
+
+        
 
     }//GEN-LAST:event_guardarBtnActionPerformed
 
     private void limpiarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarBtnActionPerformed
         // TODO add your handling code here:
         
-        cantidadPuertasCombo.setSelectedIndex(0);
+        limpiarDatos();
+    }//GEN-LAST:event_limpiarBtnActionPerformed
+
+    private void mostrarMensaje(String mensaje, String titulo){
+        JOptionPane jOptionPane = new JOptionPane(mensaje);
+         jOptionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+         JDialog dialog = jOptionPane.createDialog(titulo);
+         dialog.setAlwaysOnTop(true);
+         dialog.setVisible(true);
+    }
+    
+    
+    private void limpiarDatos(){
+         cantidadPuertasCombo.setSelectedIndex(0);
         colorTextField.setText("");
         marcaTextField.setText("");
         modeloTextField.setText("");
         motorTextField.setText("");
         patenteTextField.setText("");
-    }//GEN-LAST:event_limpiarBtnActionPerformed
-
+    }
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cantidadPuertasCombo;
