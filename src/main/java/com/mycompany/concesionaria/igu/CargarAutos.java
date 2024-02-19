@@ -4,16 +4,17 @@
  */
 package com.mycompany.concesionaria.igu;
 
+import com.mycompany.concesionaria.logica.Controladora;
+
 /**
  *
  * @author Joaquin
  */
 public class CargarAutos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CargarAutos
-     */
+     Controladora controladora = null;
     public CargarAutos() {
+        controladora = new Controladora();
         initComponents();
     }
 
@@ -165,6 +166,11 @@ public class CargarAutos extends javax.swing.JFrame {
         );
 
         limpiarBtn.setText("Limpiar");
+        limpiarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarBtnActionPerformed(evt);
+            }
+        });
 
         guardarBtn.setText("Guardar");
         guardarBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +252,31 @@ public class CargarAutos extends javax.swing.JFrame {
 
     private void guardarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBtnActionPerformed
         // TODO add your handling code here:
+        
+        String marca = marcaTextField.getText();
+        String modelo = modeloTextField.getText();
+        String color = colorTextField.getText();
+        String motor = motorTextField.getText();
+        String patente = patenteTextField.getText();
+        int cantidadPuertas = Integer.parseInt(cantidadPuertasCombo.getSelectedItem().toString());
+        
+        
+        controladora.guardarAuto(marca, modelo, color, motor, patente, cantidadPuertas);
+        
+
+
     }//GEN-LAST:event_guardarBtnActionPerformed
+
+    private void limpiarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarBtnActionPerformed
+        // TODO add your handling code here:
+        
+        cantidadPuertasCombo.setSelectedIndex(0);
+        colorTextField.setText("");
+        marcaTextField.setText("");
+        modeloTextField.setText("");
+        motorTextField.setText("");
+        patenteTextField.setText("");
+    }//GEN-LAST:event_limpiarBtnActionPerformed
 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
