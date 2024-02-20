@@ -25,4 +25,10 @@ public class Controladora {
     public List<Automovil> obtenerAutos(){
         return controlPersist.obtenerAutos();
     }
+    
+    
+    
+    public void eliminarAuto(int id){
+        controlPersist.eliminarAuto(id);
+    }
 }

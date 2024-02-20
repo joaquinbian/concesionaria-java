@@ -7,6 +7,8 @@ package com.mycompany.concesionaria.igu;
 import com.mycompany.concesionaria.logica.Automovil;
 import com.mycompany.concesionaria.logica.Controladora;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -148,6 +150,24 @@ public class VerAutos extends javax.swing.JFrame {
 
     private void eliminarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarBtnActionPerformed
         // TODO add your handling code here:
+        
+
+        if(tablaAutos.getRowCount() > 0){
+            if(tablaAutos.getSelectedRow() != -1){
+                int id = Integer.parseInt(String.valueOf(tablaAutos.getValueAt(tablaAutos.getSelectedRow(), 0)));
+                controladora.eliminarAuto(id);
+                
+                mostrarMensaje("Auto eliminado correctamente", "Eliminar auto");
+                
+                cargarTabla();
+            } else {
+                mostrarMensaje("Necesitas seleccionar un auto", "Error");
+            }
+            
+        } else {
+            mostrarMensaje("La tabla esta vacia", "Error");
+        }
+
     }//GEN-LAST:event_eliminarBtnActionPerformed
 
     private void editarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBtnActionPerformed
@@ -174,7 +194,7 @@ public class VerAutos extends javax.swing.JFrame {
             }
         };
         
-        String[] titulos = {"Modelo", "Marca", "Color", "Motor", "Patente", "N. Puertas"};
+        String[] titulos = {"Id", "Modelo", "Marca", "Color", "Motor", "Patente", "N. Puertas"};
         
         modeloTabla.setColumnIdentifiers(titulos);
         
@@ -186,6 +206,7 @@ public class VerAutos extends javax.swing.JFrame {
         for (Automovil auto : listaAutos){
             
             Object[] nuevoAuto = {
+                auto.getId(),
                 auto.getModelo(),
                 auto.getMarca(),
                 auto.getColor(),
@@ -200,6 +221,14 @@ public class VerAutos extends javax.swing.JFrame {
         //linkeamos esta tabla que creamos aca con la de la UI
         
         tablaAutos.setModel(modeloTabla);
+    }
+    
+      private void mostrarMensaje(String mensaje, String titulo){
+        JOptionPane jOptionPane = new JOptionPane(mensaje);
+         jOptionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+         JDialog dialog = jOptionPane.createDialog(titulo);
+         dialog.setAlwaysOnTop(true);
+         dialog.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
