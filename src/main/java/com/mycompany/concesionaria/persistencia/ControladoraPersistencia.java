@@ -31,4 +31,17 @@ public class ControladoraPersistencia {
     }
     
     
+    public Automovil obtenerAuto(int id){
+        return automovilJpaController.findAutomovil(id);
+    }
+    
+    public void editarAuto(Automovil nuevoAuto){
+        try {
+            automovilJpaController.edit(nuevoAuto);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladoraPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
 }

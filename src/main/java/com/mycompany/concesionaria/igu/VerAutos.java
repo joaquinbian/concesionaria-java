@@ -172,6 +172,24 @@ public class VerAutos extends javax.swing.JFrame {
 
     private void editarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBtnActionPerformed
         // TODO add your handling code here:
+        
+         if(tablaAutos.getRowCount() > 0){
+            if(tablaAutos.getSelectedRow() != -1){
+                // se navega a la pantalla de editar pasandole el id del obj
+                int id = Integer.parseInt(String.valueOf(tablaAutos.getValueAt(tablaAutos.getSelectedRow(), 0)));
+                EditarAuto editarAuto = new EditarAuto(id);
+                editarAuto.setVisible(true);
+                editarAuto.setLocationRelativeTo(null);
+                
+                
+                this.dispose();
+            } else {
+                mostrarMensaje("Necesitas seleccionar un auto", "Error");
+            }
+            
+        } else {
+            mostrarMensaje("La tabla esta vacia", "Error");
+        }
    
     }//GEN-LAST:event_editarBtnActionPerformed
 

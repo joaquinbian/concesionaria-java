@@ -31,4 +31,22 @@ public class Controladora {
     public void eliminarAuto(int id){
         controlPersist.eliminarAuto(id);
     }
+    
+    
+    public Automovil obtenerAuto(int id){
+        return controlPersist.obtenerAuto(id);
+    }
+    
+    public void editarAuto(Automovil auto, String marca, String modelo, String color, String motor, String patente, int cantidadPuertas){
+        
+        auto.setMarca(marca);
+        auto.setModelo(modelo);
+        auto.setColor(color);
+        auto.setMotor(motor);
+        auto.setPatente(patente);
+        auto.setCantidadPuertas(cantidadPuertas);
+        
+        controlPersist.editarAuto(auto);
+        
+    }
 }
