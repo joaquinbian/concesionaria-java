@@ -4,16 +4,23 @@
  */
 package com.mycompany.concesionaria.igu;
 
+import com.mycompany.concesionaria.logica.Automovil;
+import com.mycompany.concesionaria.logica.Controladora;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Joaquin
  */
 public class VerAutos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VerAutos
-     */
+    Controladora controladora = null;
+    
     public VerAutos() {
+        
+        controladora = new Controladora();
+           
         initComponents();
     }
 
@@ -35,6 +42,11 @@ public class VerAutos extends javax.swing.JFrame {
         editarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel2.setText("LISTADO DE AUTOS");
@@ -140,9 +152,55 @@ public class VerAutos extends javax.swing.JFrame {
 
     private void editarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarBtnActionPerformed
         // TODO add your handling code here:
+   
     }//GEN-LAST:event_editarBtnActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        cargarTabla();
+    }//GEN-LAST:event_formWindowOpened
+
    
+    
+    
+    private void cargarTabla(){
+             
+         //definir el modelo de la tabla
+        DefaultTableModel modeloTabla = new DefaultTableModel() {
+            //fila y columna no son editables
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        
+        String[] titulos = {"Modelo", "Marca", "Color", "Motor", "Patente", "N. Puertas"};
+        
+        modeloTabla.setColumnIdentifiers(titulos);
+        
+        //obtenemos la lista de autos
+        List<Automovil> listaAutos = controladora.obtenerAutos();
+        
+        //por cada auto vamos agregando una fila
+        
+        for (Automovil auto : listaAutos){
+            
+            Object[] nuevoAuto = {
+                auto.getModelo(),
+                auto.getMarca(),
+                auto.getColor(),
+                auto.getMotor(),
+                auto.getPatente(),
+                auto.getCantidadPuertas()
+            };
+            
+            modeloTabla.addRow(nuevoAuto);
+        }
+        
+        //linkeamos esta tabla que creamos aca con la de la UI
+        
+        tablaAutos.setModel(modeloTabla);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editarBtn;

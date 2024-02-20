@@ -108,6 +108,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void verAutosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verAutosBtnActionPerformed
         // TODO add your handling code here:
+        
+        VerAutos verAutos = new VerAutos();
+        verAutos.setVisible(true);
+        verAutos.setLocationRelativeTo(null);
+        
+        this.dispose();
+              
     }//GEN-LAST:event_verAutosBtnActionPerformed
 
     private void cargarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarAutoBtnActionPerformed

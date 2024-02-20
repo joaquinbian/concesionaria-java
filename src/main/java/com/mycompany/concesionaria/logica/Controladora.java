@@ -1,6 +1,7 @@
 package com.mycompany.concesionaria.logica;
 
 import com.mycompany.concesionaria.persistencia.ControladoraPersistencia;
+import java.util.List;
 
 public class Controladora {
     
@@ -19,5 +20,9 @@ public class Controladora {
         
         //llama a la funcion de la persistencia
         controlPersist.guardarAuto(nuevoAuto);
+    }
+    
+    public List<Automovil> obtenerAutos(){
+        return controlPersist.obtenerAutos();
     }
 }
